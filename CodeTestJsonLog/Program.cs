@@ -26,8 +26,8 @@ namespace CodeTestJsonLog
 
             watch.Restart();
             //Method 2, only the standard libraries
-            //The Sort is O(nlog(n)), so the runtime complexity is 
-            //runtime and memory complexity
+            //The Sort is O(nlog(n)), so the runtime complexity is O(nlog(n))
+            //the memory complexity is O(2N) 
             ParseTracingLog ParseTracingLog = new ParseTracingLog();
             ParseTracingLog.Process(inputFileName);
 
