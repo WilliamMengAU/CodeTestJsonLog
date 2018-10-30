@@ -33,16 +33,27 @@ namespace CodeTestJsonLog
                     foreach (var node in sortedList)
                     {
                         var curNode = node;
+                        string parent_span_id = "";
                         var item = curNode.TracingLog;
-                        fs.Write("- " + item.time + " " + item.component + " " + item.msg + "\r\n");
 
-                        while (curNode.Next != null)
+                        //Assumptions: the tracelog with same trace_id and parent_span_id is continuous in the timeline.
+                        while (curNode != null)
                         {
-                            curNode = curNode.Next;
                             item = curNode.TracingLog;
-                            fs.Write("    ");
-                            fs.Write("- " + item.time + " " + item.component + " " + item.msg + "\r\n");
+                            if (parent_span_id == item.parent_span_id)
+                            {
+                                fs.Write("    ");
+                            }
+                            else
+                            {
+                                parent_span_id = item.span_id;
+                            }
+
+                            fs.Write("- " + item.time + " " + item.app + " " + item.component + " " + item.msg + "\r\n");
+                            curNode = curNode.Next;
                         }
+
+                        fs.Write("\r\n");
                     }
                 }
 

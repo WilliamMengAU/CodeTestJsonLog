@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace CodeTestJsonLog
 {
-    //"time": "2018-08-31T04:05:13+10:00",
-    //"app": "svc-app1",
-    //"msg": "failed to load user profile for 598e6798-c010-4411-bae8-5effad3388d4, user profile service returned error",
-    //"span_id": "e9c0aaef-a560-4585-8b0d-10eefd8c4245",
-    //"component": "auth.user.Login()",
+    //"time": "2018-08-29T16:31:29+10:00",
+    //"component": "auth.user.LoadUserProfile()",
+    //"msg": "starting load of user profile",
+    //"app": "svc-app-2",
+    //"span_id": "2b92fb13-107a-4867-b3f0-bc304d66e197",
+    //"parent_span_id": "e9c0aaef-a560-4585-8b0d-10eefd8c4245",
     //"level": "debug",
     //"env": "prod",
     //"trace_id": "3394076c-da44-4366-96be-67de338d1c2b"
@@ -21,6 +22,8 @@ namespace CodeTestJsonLog
         public string time { get; set; }
         public string app { get; set; }
         public string msg { get; set; }
+        public string span_id { get; set; }
+        public string parent_span_id { get; set; }
         public string component { get; set; }
         public string trace_id { get; set; }
 
@@ -39,6 +42,12 @@ namespace CodeTestJsonLog
                     break;
                 case "component":
                     component = lineArr[1];
+                    break;
+                case "span_id":
+                    span_id = lineArr[1];
+                    break;
+                case "parent_span_id":
+                    parent_span_id = lineArr[1];
                     break;
                 case "trace_id":
                     trace_id = lineArr[1];
